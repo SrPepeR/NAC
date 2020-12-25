@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name" translatable="false">Calc</string>
+    <string name="mode_calculator">calculator</string>
+    <string name="mode_converter">converter</string>
+    <string name="calc_sin" translatable="false">sin</string>
+    <string name="calc_cos" translatable="false">cos</string>
+    <string name="calc_tan" translatable="false">tan</string>
+    <string name="calc_pi" translatable="false">π</string>
+    <string name="calc_root" translatable="false">√</string>
+    <string name="calc_percentage" translatable="false">%</string>
+    <string name="calc_log" translatable="false">log</string>
+    <string name="calc_bra_open" translatable="false">(</string>
+    <string name="calc_ln" translatable="false">ln</string>
+    <string name="calc_bra_close" translatable="false">)</string>
+    <string name="calc_pot" translatable="false">^</string>
+    <string name="calc_frac" translatable="false">/</string>
+    <string name="calc_mult" translatable="false">×</string>
+    <string name="calc_div" translatable="false">÷</string>
+    <string name="calc_sub" translatable="false">-</string>
+    <string name="calc_sum" translatable="false">+</string>
+    <string name="calc_equal" translatable="false">=</string>
+    <string name="num_comma" translatable="false">,</string>
+    <string name="num_zero" translatable="false">0</string>
+    <string name="num_one" translatable="false">1</string>
+    <string name="num_two" translatable="false">2</string>
+    <string name="num_three" translatable="false">3</string>
+    <string name="num_four" translatable="false">4</string>
+    <string name="num_five" translatable="false">5</string>
+    <string name="num_six" translatable="false">6</string>
+    <string name="num_seven" translatable="false">7</string>
+    <string name="num_eight" translatable="false">8</string>
+    <string name="num_nine" translatable="false">9</string>
+    <string name="con_money">money</string>
+    <string name="con_volume">volume</string>
+    <string name="con_len">length</string>
+    <string name="con_area" translatable="false">area</string>
+    <string name="con_weight">weight</string>
+    <string name="con_temp">temperature</string>
+    <string name="con_time">time</string>
+    <string name="con_speed">speed</string>
+    <string name="con_data">data</string>
+    <string-array name="length">
+        <item name="m" translatable="false">m</item>
+        <item name="km" translatable="false">km</item>
+        <item name="hm" translatable="false">hm</item>
+        <item name="dam" translatable="false">dam</item>
+        <item name="dm" translatable="false">dm</item>
+        <item name="cm" translatable="false">cm</item>
+        <item name="mm" translatable="false">mm</item>
+    </string-array>
+    <string-array name="area">
+        <item name="m" translatable="false">m\u00B2</item>
+        <item name="km" translatable="false">km\u00B2</item>
+        <item name="hm" translatable="false">hm\u00B2</item>
+        <item name="dam" translatable="false">dam\u00B2</item>
+        <item name="dm" translatable="false">dm\u00B2</item>
+        <item name="cm" translatable="false">cm\u00B2</item>
+        <item name="mm" translatable="false">mm\u00B2</item>
+    </string-array>
+    <string-array name="volume">
+        <item name="m" translatable="false">m\u00B3</item>
+        <item name="km" translatable="false">km\u00B3</item>
+        <item name="hm" translatable="false">hm\u00B3</item>
+        <item name="dam" translatable="false">dam\u00B3</item>
+        <item name="dm" translatable="false">dm\u00B3</item>
+        <item name="cm" translatable="false">cm\u00B3</item>
+        <item name="mm" translatable="false">mm\u00B3</item>
+    </string-array>
+    <string-array name="speed">
+        <item name="m/s" translatable="false">m/s</item>
+        <item name="km/h" translatable="false">km/h</item>
+        <item name="mph" translatable="false">mph</item>
+        <item name="kn" translatable="false">kn</item>
+        <item name="ft/s" translatable="false">ft/s</item>
+    </string-array>
+    <string-array name="time">
+        <item name="s">second</item>
+        <item name="m">minute</item>
+        <item name="d">day</item>
+        <item name="h">hour</item>
+        <item name="ms">millisecond</item>
+    </string-array>
+    <string-array name="weight">
+        <item name="gr">gram</item>
+        <item name="kg">kilogram</item>
+        <item name="t">ton</item>
+        <item name="p">pound</item>
+        <item name="oz">ounce</item>
+    </string-array>
+    <string-array name="temperature">
+        <item name="c" translatable="false">celsius</item>
+        <item name="k" translatable="false">kelvin</item>
+        <item name="f" translatable="false">fahrenheit</item>
+    </string-array>
+    <string-array name="money">
+        <item name="euro">euro</item>
+        <item name="dollar">dollar</item>
+        <item name="bitcoin">bitcoin</item>
+        <item name="pound">pound</item>
+        <item name="ruble">ruble</item>
+        <item name="yen">yen</item>
+    </string-array>
+    <string-array name="data">
+        <item name="gb" translatable="false">gigabyte</item>
+        <item name="tb" translatable="false">terabyte</item>
+        <item name="pb" translatable="false">petabyte</item>
+        <item name="mb" translatable="false">megabyte</item>
+        <item name="kb" translatable="false">kilobyte</item>
+        <item name="b" translatable="false">byte</item>
+    </string-array>
+</resources>

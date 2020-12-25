@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mode_calculator">calculadora</string>
+    <string name="mode_converter">conversor</string>
+    <string name="con_money">moneda</string>
+    <string name="con_volume">volumen</string>
+    <string name="con_len">longitud</string>
+    <string name="con_weight">peso</string>
+    <string name="con_temp">temperatura</string>
+    <string name="con_time">tiempo</string>
+    <string name="con_speed">velocidad</string>
+    <string name="con_data">datos</string>
+    <string-array name="time">
+        <item name="s">segundo</item>
+        <item name="m">minuto</item>
+        <item name="d">día</item>
+        <item name="h">hora</item>
+        <item name="ms">milisegundo</item>
+    </string-array>
+    <string-array name="weight">
+        <item name="gr">gramo</item>
+        <item name="kg">kilogramo</item>
+        <item name="t">tonelada</item>
+        <item name="p">libra</item>
+        <item name="oz">onza</item>
+    </string-array>
+    <string-array name="money">
+        <item name="euro">euro</item>
+        <item name="dollar">dólar</item>
+        <item name="bitcoin">bitcoin</item>
+        <item name="pound">libra</item>
+        <item name="ruble">rublo</item>
+        <item name="yen">yen</item>
+    </string-array>
+</resources>
