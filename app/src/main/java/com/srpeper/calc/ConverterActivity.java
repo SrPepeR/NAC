@@ -46,15 +46,21 @@ public class ConverterActivity extends AppCompatActivity {
 
         this.converter = new Converter();
 
+        this.typeArray = getResources().getStringArray(R.array.length);
+
         this.value = findViewById(R.id.txt_value);
         this.result = findViewById(R.id.txt_result_conv);
         this.type = findViewById(R.id.txt_type);
         this.delete = findViewById(R.id.btn_delete_conv);
 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, this.typeArray);
+
         this.valueSPN = findViewById(R.id.spn_unity_value);
         this.valueSPN.setSelection(0);
+        this.valueSPN.setAdapter(arrayAdapter);
         this.resultSPN = findViewById(R.id.spn_unity_result);
         this.resultSPN.setSelection(1);
+        this.resultSPN.setAdapter(arrayAdapter);
 
         this.delete.setOnLongClickListener(v -> {
             deleteAll();
@@ -85,8 +91,6 @@ public class ConverterActivity extends AppCompatActivity {
 
             }
         });
-
-        this.typeArray = getResources().getStringArray(R.array.length);
     }
 
     public void change (View button) {
@@ -186,7 +190,7 @@ public class ConverterActivity extends AppCompatActivity {
                 break;
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, this.typeArray);
+        adapter = new ArrayAdapter<>(this, R.layout.spinner_item, this.typeArray);
 
         this.valueSPN.setAdapter(adapter);
         this.valueSPN.setSelection(0);

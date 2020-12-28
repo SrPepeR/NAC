@@ -78,35 +78,40 @@ public class Converter {
     }
 
     public void changeResult () {
-        switch (this.type) {
-            case LENGTH :
-                convertLength();
-                break;
-            case AREA :
-                convertArea();
-                break;
-            case VOLUME :
-                convertVolume();
-                break;
-            case SPEED :
-                convertSpeed();
-                break;
-            case TIME :
-                convertTime();
-                break;
-            case WEIGHT :
-                convertWeight();
-                break;
-            case TEMP :
-                convertTemperature();
-                break;
-            case MONEY :
-                convertMoney();
-                break;
-            case DATA :
-                convertData();
-                break;
+        if (this.valueSTR.length() > 0) {
+            switch (this.type) {
+                case LENGTH :
+                    convertLength();
+                    break;
+                case AREA :
+                    convertArea();
+                    break;
+                case VOLUME :
+                    convertVolume();
+                    break;
+                case SPEED :
+                    convertSpeed();
+                    break;
+                case TIME :
+                    convertTime();
+                    break;
+                case WEIGHT :
+                    convertWeight();
+                    break;
+                case TEMP :
+                    convertTemperature();
+                    break;
+                case MONEY :
+                    convertMoney();
+                    break;
+                case DATA :
+                    convertData();
+                    break;
+            }
+        } else {
+            this.result = 0.0;
         }
+
     }
 
     private void convertLength () {

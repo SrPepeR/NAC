@@ -6,7 +6,6 @@ import com.srpeper.calc.enums.Num;
 import com.srpeper.calc.enums.Op;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Calculator {
 
@@ -32,7 +31,7 @@ public class Calculator {
         if (checkNum() && this.operation.length() > 0) {
             this.operation.append(num.getSymbol());
             this.partsControl.get(partsControl.size() - 1).append(num.getSymbol());
-            changeResult();
+            changeResult(this.partsControl);
         }
     }
 
@@ -41,7 +40,7 @@ public class Calculator {
             if (checkPI()) {
                 this.operation.append(num.getSymbol());
                 this.partsControl.add(new StringBuffer().append(num.getSymbol()));
-                changeResult();
+                changeResult(this.partsControl);
             }
         } else {
             if (checkNum()) {
@@ -55,7 +54,7 @@ public class Calculator {
                 } else {
                     this.partsControl.add(new StringBuffer().append(num.getSymbol()));
                 }
-                changeResult();
+                changeResult(this.partsControl);
             }
         }
     }
@@ -102,7 +101,7 @@ public class Calculator {
                     this.operation.append(espP.getSymbol());
                     this.partsControl.add(new StringBuffer().append(espP.getSymbol()));
                     if (espP == EspP.PERCENTAGE) {
-                        changeResult();
+                        changeResult(this.partsControl);
                     }
                 }
             }
@@ -117,137 +116,129 @@ public class Calculator {
             } else {
                 this.partsControl.remove(this.partsControl.size() - 1);
             }
-            changeResult();
+            changeResult(this.partsControl);
         }
     }
 
-    private void changeResult () {
-        double result = 0;
+    private void changeResult(ArrayList<StringBuffer> parts) {
+        ArrayList<StringBuffer> partsCopy = new ArrayList<StringBuffer> (parts);
+        boolean flag = false;
 
-        if (this.partsControl.size() > 0) {
-            ArrayList<Integer> prioPos = new ArrayList<>();
-            ArrayList<StringBuffer> partsControlCopy = new ArrayList<>(this.partsControl);
-
-            if (partsControlCopy.size() > 1) {
-                if (!Num.ONE.equals(partsControlCopy.get(partsControlCopy.size() - 1).charAt(0)) && partsControlCopy.get(partsControlCopy.size() - 1).charAt(0) != EspP.PERCENTAGE.getSymbol()) {
-                    //THE LAST SYMBOL MUST BE IGNORED
-                    partsControlCopy.remove(partsControlCopy.size() - 1);
-                }
-
-                //ESPA NEED TO CALCULATE FIRST WITH i+1 POS.
-                for (int i = 0; i < partsControlCopy.size(); i++) {
-                    if (EspA.COS.equals(partsControlCopy.get(i).charAt(0))) {
-                        prioPos.add(i + 1);
-                        partsControlCopy.set(i, calculateESPA(partsControlCopy.get(i), partsControlCopy.get(i + 1)));
-                    }
-                }
-                if (prioPos.size() > 0) {
-                    //THERE ARE ESPA SYMBOLS, THE ORDER OF THE MARKED POSITIONS IS REVERSED AND REMOVED FROM THE COPY.
-                    Collections.reverse(prioPos);
-                    for (int pos: prioPos) {
-                        partsControlCopy.remove(pos);
-                    }
-                    //CLEANED UP THE LIST OF MARKED POSITIONS.
-                    prioPos = new ArrayList<>();
-                }
-
-                //ESPP NEEDS TO BE REVIEWED ON A CASE-BY-CASE BASIS
-                //IN THE CASE OF A PERCENTAGE THEY ARE CALCULATED BASED ON i-1 % i.
-                for (int i = 0; i < partsControlCopy.size(); i++) {
-                    if (partsControlCopy.get(i).charAt(0) == '%') {
-                        prioPos.add(i);
-                        //PERCENTAGE IS i-1 / 100.
-                        if (partsControlCopy.get(i - 1).toString().equals(String.valueOf(Num.PI.getSymbol()))) {
-                            partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Num.PI.getValue() / 100)));
-                        } else {
-                            partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Double.parseDouble(partsControlCopy.get(i - 1).toString()) / 100)));
-                        }
-                    }
-                }
-                if (prioPos.size() > 0) {
-                    //THERE ARE PERCENTAGE SYMBOLS, THE ORDER OF THE MARKED POSITIONS IS REVERSED AND REMOVED FROM THE COPY.
-                    Collections.reverse(prioPos);
-                    for (int pos: prioPos) {
-                        partsControlCopy.remove(pos);
-                    }
-                    //CLEANED UP THE LIST OF MARKED POSITIONS.
-                    prioPos = new ArrayList<>();
-                }
-
-                //IN THE CASE OF A FRACTION THEY ARE CALCULATED BASED ON i-1 / i.
-                for (int i = 0; i < partsControlCopy.size(); i++) {
-                    if (partsControlCopy.get(i).charAt(0) == EspP.FRACTION.getSymbol()) {
-                        prioPos.add(i);
-                        //FRACTION IS i-1 / i+1.
-                        if (partsControlCopy.get(i - 1).toString().equals(String.valueOf(Num.PI.getSymbol()))) {
-                            if (partsControlCopy.get(i + 1).toString().equals(String.valueOf(Num.PI.getSymbol()))) {
-                                partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Num.PI.getValue() / Num.PI.getValue())));
-                            } else {
-                                partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Num.PI.getValue() / Double.parseDouble(partsControlCopy.get(i + 1).toString()))));
-                            }
-                        } else {
-                            if (partsControlCopy.get(i + 1).toString().equals(String.valueOf(Num.PI.getSymbol()))) {
-                                partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Double.parseDouble(partsControlCopy.get(i - 1).toString()) / Num.PI.getValue())));
-                            } else {
-                                partsControlCopy.set(i - 1, new StringBuffer(String.valueOf(Double.parseDouble(partsControlCopy.get(i - 1).toString()) / Double.parseDouble(partsControlCopy.get(i + 1).toString()))));
-                            }
-                        }
-                    }
-                }
-                if (prioPos.size() > 0) {
-                    //THERE ARE FRACTIONS SYMBOLS, THE ORDER OF THE MARKED POSITIONS IS REVERSED AND REMOVED FROM THE COPY.
-                    Collections.reverse(prioPos);
-                    for (int pos: prioPos) {
-                        partsControlCopy.remove(pos + 1);
-                        partsControlCopy.remove(pos);
-                    }
-                    //CLEANED UP THE LIST OF MARKED POSITIONS.
-                    prioPos = new ArrayList<>();
-                }
-
-                //OP NEED TO CALCULATE FIRST HIGH PRIORITY OPERATORS.
-                for (int i = 0; i < partsControlCopy.size(); i++) {
-                    if (Op.MUL.isHighPriority(partsControlCopy.get(i).charAt(0))) {
-                        prioPos.add(i);
-                        partsControlCopy.set(i - 1, calculateOp(i, partsControlCopy));
-                    }
-                }
-                if (prioPos.size() > 0) {
-                    //THERE ARE ESPA SYMBOLS, THE ORDER OF THE MARKED POSITIONS IS REVERSED AND REMOVED FROM THE COPY.
-                    Collections.reverse(prioPos);
-                    for (int pos: prioPos) {
-                        partsControlCopy.remove(pos + 1);
-                        partsControlCopy.remove(pos);
-                    }
-                }
-                //LAST CALCULATE NORMALS OP.
-                while (partsControlCopy.size() >= 3) {
-                    double opResult = calculateNormal(partsControlCopy.get(0), partsControlCopy.get(1), partsControlCopy.get(2));
-
-                    partsControlCopy.set(0, new StringBuffer(String.valueOf(opResult)));
-                    partsControlCopy.remove(2);
-                    partsControlCopy.remove(1);
-                }
-
-                if (partsControlCopy.get(0).charAt(0) == Num.PI.getSymbol()) {
-                    result = Num.PI.getValue();
+        if (partsCopy.size() > 1) {
+            int i = 0;
+            while (i < partsCopy.size() && !flag) {
+                if (EspA.SIN.equals(partsCopy.get(i).charAt(0))) {
+                    partsCopy.set(i, calculateESPA(partsCopy.get(i), partsCopy.get(i + 1)));
+                    partsCopy.remove(i + 1);
+                    flag = true;
                 } else {
-                    result = Double.parseDouble(partsControlCopy.get(0).toString());
+                    i++;
                 }
+            }
+
+            if (flag) {
+                changeResult(partsCopy);
             } else {
-                if (EspA.COS.equals(partsControlCopy.get(0).charAt(0))) {
-                    result = 0;
-                } else {
-                    if (partsControlCopy.get(0).charAt(0) == Num.PI.getSymbol()) {
-                        result = Num.PI.getValue();
+                i = 0;
+                while (i < partsCopy.size() && !flag) {
+                    if (EspP.FRACTION.equals(partsCopy.get(i).charAt(0))) {
+                        if (partsCopy.get(i).charAt(0) == EspP.PERCENTAGE.getSymbol()) {
+                            partsCopy.set(i - 1, calculatePercentage(i - 1, partsCopy));
+                            partsCopy.remove(i);
+                        } else {
+                            partsCopy.set(i - 1, calculateFraction(i, partsCopy));
+                            partsCopy.remove(i + 1);
+                            partsCopy.remove(i);
+                        }
+
+                        flag = true;
                     } else {
-                        result = Double.parseDouble(partsControlCopy.get(0).toString());
+                        i++;
+                    }
+                }
+
+                if (flag) {
+                    changeResult(partsCopy);
+                } else {
+                    i = 0;
+                    while (i < partsCopy.size() && !flag) {
+                        if (Op.POT.isHighPriority(partsCopy.get(i).charAt(0))) {
+                            partsCopy.set(i - 1, calculateOp(i, partsCopy));
+                            partsCopy.remove(i + 1);
+                            partsCopy.remove(i);
+                            flag = true;
+                        } else {
+                            i++;
+                        }
+                    }
+
+                    if (flag) {
+                        changeResult(partsCopy);
+                    } else {
+                        boolean numPrev = true;
+                        i = 0;
+                        while (i < partsCopy.size()) {
+                            if (!numPrev) {
+                                partsCopy.add(i, new StringBuffer(Op.SUM.getSymbol()));
+                            }
+                            if (isNum(partsCopy.get(i))) {
+                                numPrev = true;
+                            } else {
+                                numPrev = false;
+                            }
+                            i++;
+                        }
+                        while (partsCopy.size() >= 3) {
+                            double opResult = calculateNormal(partsCopy.get(0), partsCopy.get(1), partsCopy.get(2));
+                            partsCopy.set(0, new StringBuffer(String.valueOf(opResult)));
+                            partsCopy.remove(2);
+                            partsCopy.remove(1);
+                        }
+
+                        result = Double.parseDouble(partsCopy.get(0).toString());
                     }
                 }
             }
+        } else {
+            if (partsCopy.get(0).charAt(0) == Num.PI.getSymbol()) {
+                this.result = Num.PI.getValue();
+            } else {
+                this.result = Double.parseDouble(partsCopy.get(0).toString());
+            }
+        }
+    }
+
+    private StringBuffer calculatePercentage (int i, ArrayList<StringBuffer> parts) {
+        StringBuffer str = new StringBuffer();
+
+        if (parts.get(i - 1).toString().charAt(0) == Num.PI.getSymbol()) {
+            str.append(String.valueOf(Num.PI.getValue() / 100));
+        } else {
+            str.append(String.valueOf(Double.parseDouble(parts.get(i - 1).toString()) / 100));
         }
 
-        this.result = result;
+        return  str;
+    }
+
+    private StringBuffer calculateFraction (int i, ArrayList<StringBuffer> parts) {
+        StringBuffer str = new StringBuffer();
+
+        if (parts.get(i - 1).toString().charAt(0) == Num.PI.getSymbol()) {
+            if (parts.get(i + 1).toString().charAt(0) == Num.PI.getSymbol()) {
+                str.append(String.valueOf(1));
+            } else {
+                str.append(String.valueOf(Num.PI.getValue() / Double.parseDouble(parts.get(i + 1).toString())));
+            }
+
+        } else {
+            if (parts.get(i + 1).toString().charAt(0) == Num.PI.getSymbol()) {
+                str.append(String.valueOf(Double.parseDouble(parts.get(i - 1).toString()) / Num.PI.getValue()));
+            } else {
+                str.append(String.valueOf(Double.parseDouble(parts.get(i - 1).toString()) / Double.parseDouble(parts.get(i + 1).toString())));
+            }
+        }
+
+        return  str;
     }
 
     public void result () {
@@ -459,6 +450,20 @@ public class Calculator {
         }
 
         return isValid;
+    }
+
+    private boolean isNum (StringBuffer str) {
+        boolean isNum = true;
+
+        try {
+            Double.parseDouble(str.toString());
+        } catch (NumberFormatException ex) {
+            if (str.charAt(0) != Num.PI.getSymbol() && !Op.SUM.equals(str.charAt(0))) {
+                isNum = false;
+            }
+        }
+
+        return isNum;
     }
 
 }
