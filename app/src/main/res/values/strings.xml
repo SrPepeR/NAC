@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Calc</string>
+    <string name="app_name" translatable="false">NAC</string>
     <string name="mode_calculator">calculator</string>
     <string name="mode_converter">converter</string>
     <string name="calc_sin" translatable="false">sin</string>
