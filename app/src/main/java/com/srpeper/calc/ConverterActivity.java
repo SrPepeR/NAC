@@ -93,9 +93,14 @@ public class ConverterActivity extends AppCompatActivity {
         });
     }
 
-    public void change (View button) {
+    public void toCalculator (View button) {
         Intent toCalculator = new Intent(this, CalculatorActivity.class);
         startActivity(toCalculator);
+    }
+
+    public void toOperations (View button) {
+        Intent toOperations = new Intent(this, OperationsActivity.class);
+        startActivity(toOperations);
     }
 
     private void changeValueMag (int position) {

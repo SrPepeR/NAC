@@ -5,6 +5,7 @@ import com.srpeper.calc.enums.EspP;
 import com.srpeper.calc.enums.Num;
 import com.srpeper.calc.enums.Op;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Calculator {
@@ -30,7 +31,12 @@ public class Calculator {
     public void addZero (Num num) {
         if (checkNum() && this.operation.length() > 0) {
             this.operation.append(num.getSymbol());
-            this.partsControl.get(partsControl.size() - 1).append(num.getSymbol());
+            char prev = this.partsControl.get(this.partsControl.size() - 1).charAt(this.partsControl.get(this.partsControl.size() - 1).length() - 1);
+            if (!Num.ONE.equals(prev) && prev != EspP.COMMA.getSymbol()) {
+                this.partsControl.add(new StringBuffer().append(num.getSymbol()));
+            } else {
+                this.partsControl.get(partsControl.size() - 1).append(num.getSymbol());
+            }
             changeResult(this.partsControl);
         }
     }
@@ -116,7 +122,14 @@ public class Calculator {
             } else {
                 this.partsControl.remove(this.partsControl.size() - 1);
             }
-            changeResult(this.partsControl);
+            if (this.operation.length() > 0) {
+                char prev = this.operation.charAt(this.operation.length() - 1);
+                if (Num.ONE.equals(prev) || prev == EspP.PERCENTAGE.getSymbol()) {
+                    changeResult(this.partsControl);
+                }
+            } else {
+                this.result = 0;
+            }
         }
     }
 
@@ -143,7 +156,7 @@ public class Calculator {
                 while (i < partsCopy.size() && !flag) {
                     if (EspP.FRACTION.equals(partsCopy.get(i).charAt(0))) {
                         if (partsCopy.get(i).charAt(0) == EspP.PERCENTAGE.getSymbol()) {
-                            partsCopy.set(i - 1, calculatePercentage(i - 1, partsCopy));
+                            partsCopy.set(i - 1, calculatePercentage(i, partsCopy));
                             partsCopy.remove(i);
                         } else {
                             partsCopy.set(i - 1, calculateFraction(i, partsCopy));
@@ -195,7 +208,7 @@ public class Calculator {
                             partsCopy.remove(1);
                         }
 
-                        result = Double.parseDouble(partsCopy.get(0).toString());
+                        this.result = Double.parseDouble(partsCopy.get(0).toString());
                     }
                 }
             }
@@ -338,33 +351,33 @@ public class Calculator {
     }
 
     private double calculateNormal(StringBuffer num1STR, StringBuffer opSTR, StringBuffer num2STR) {
-        double result = 0;
-        double num1;
+        BigDecimal result = new BigDecimal(0);
+        BigDecimal num1;
         char op = opSTR.charAt(0);
-        double num2;
+        BigDecimal num2;
 
         if (String.valueOf(Num.PI.getSymbol()).equals(num1STR.toString())) {
-            num1 = Num.PI.getValue();
+            num1 = BigDecimal.valueOf(Num.PI.getValue());
         } else {
-            num1 = Double.parseDouble(num1STR.toString());
+            num1 = BigDecimal.valueOf(Double.parseDouble(num1STR.toString()));
         }
 
         if (String.valueOf(Num.PI.getSymbol()).equals(num2STR.toString())) {
-            num2 = Num.PI.getValue();
+            num2 = BigDecimal.valueOf(Num.PI.getValue());
         } else {
-            num2 = Double.parseDouble(num2STR.toString());
+            num2 = BigDecimal.valueOf(Double.parseDouble(num2STR.toString()));
         }
 
         switch (op) {
             case '+' :
-                result = num1 + num2;
+                result = num1.add(num2);
                 break;
             case '-' :
-                result = num1 - num2;
+                result = num1.subtract(num2);
                 break;
         }
 
-        return result;
+        return result.doubleValue();
     }
 
     private boolean checkNum () {
@@ -466,4 +479,84 @@ public class Calculator {
         return isNum;
     }
 
+    public void setOperation(String[] operation) {
+        for (String part : operation) {
+            part = part.replace(',', EspP.COMMA.getSymbol());
+            if (isNum(new StringBuffer().append(part)) && !Op.SUM.equals(part.charAt(0))) {
+                for (int i = 0; i < part.length(); i++) {
+                    addNewNum(part.charAt(i));
+                }
+            } else if (part.charAt(part.length() - 1) == EspP.PERCENTAGE.getSymbol()) {
+                    for (int i = 0; i < part.length() - 1; i++) {
+                        if (isNum(new StringBuffer().append(part.charAt(i))) || part.charAt(0) == ',') {
+                            addNewNum(part.charAt(i));
+                        }
+                    }
+            } else if (part.equals("pi") || part.equals("phi")) {
+                addNum(Num.PI);
+            } else if (part.equals("menos") || part.equals("substract") || part.equals(String.valueOf(Op.SUB.getSymbol()))) {
+                addOp(Op.SUB);
+            } else if (part.equals("más") || part.equals("more") || part.equals("sum") || part.equals(String.valueOf(Op.SUM.getSymbol()))) {
+                addOp(Op.SUM);
+            } else if (part.equals("por") || part.equals("multiplicado") || part.equals("multiply") || part.equals("multiplied") || part.equals("x") || part.equals(String.valueOf(Op.MUL.getSymbol()))) {
+                addOp(Op.MUL);
+            } else if (part.equals("entre") || part.equals("dividido") || part.equals("division") || part.equals("divided") || part.equals(String.valueOf(Op.DIV.getSymbol()))) {
+                addOp(Op.DIV);
+            } else if (part.equals("elevado") || part.equals("elevated") || part.equals(String.valueOf(Op.POT.getSymbol()))) {
+                addOp(Op.POT);
+            } else if (part.equals("log") || part.equals("logaritmo") || part.equals("logarithm") || part.equals(String.valueOf(EspA.LOG.getSymbol()))) {
+                addEspA(EspA.LOG);
+            } else if (part.equals("ln") || part.equals(String.valueOf(EspA.LN.getSymbol()))) {
+                addEspA(EspA.LN);
+            } else if (part.equals("raíz") || part.equals(String.valueOf(EspA.ROOT.getSymbol()))) {
+                addEspA(EspA.ROOT);
+            } else if (part.equals("seno") || part.equals("sin") || part.equals(String.valueOf(EspA.SIN.getSymbol()))) {
+                addEspA(EspA.SIN);
+            } else if (part.equals("coseno") || part.equals("cos") || part.equals(String.valueOf(EspA.COS.getSymbol()))) {
+                addEspA(EspA.COS);
+            } else if (part.equals("tangente") || part.equals("tan") || part.equals(String.valueOf(EspA.TAN.getSymbol()))) {
+                addEspA(EspA.TAN);
+            } else if (part.equals("partido") || part.equals("split") || part.equals("fracción") || part.equals(String.valueOf(EspP.FRACTION.getSymbol()))) {
+                addEspP(EspP.FRACTION);
+            }
+        }
+    }
+
+    private void addNewNum(char num) {
+        switch (num) {
+            case '0' :
+                addNum(Num.ZERO);
+                break;
+            case '1' :
+                addNum(Num.ONE);
+                break;
+            case '2' :
+                addNum(Num.TWO);
+                break;
+            case '3' :
+                addNum(Num.THREE);
+                break;
+            case '4' :
+                addNum(Num.FOUR);
+                break;
+            case '5' :
+                addNum(Num.FIVE);
+                break;
+            case '6' :
+                addNum(Num.SIX);
+                break;
+            case '7' :
+                addNum(Num.SEVEN);
+                break;
+            case '8' :
+                addNum(Num.EIGHT);
+                break;
+            case '9' :
+                addNum(Num.NINE);
+                break;
+            case '.' :
+                addEspP(EspP.COMMA);
+                break;
+        }
+    }
 }

@@ -2,6 +2,7 @@
 <resources>
     <string name="mode_calculator">calculadora</string>
     <string name="mode_converter">conversor</string>
+    <string name="mode_operations">operaciones</string>
     <string name="con_money">moneda</string>
     <string name="con_volume">volumen</string>
     <string name="con_len">longitud</string>
@@ -10,6 +11,12 @@
     <string name="con_time">tiempo</string>
     <string name="con_speed">velocidad</string>
     <string name="con_data">datos</string>
+    <string name="op_clear">limpiar</string>
+    <string-array name="op_types">
+        <item name="ohm">ley de Ohm</item>
+        <item name="3_direct">regla de tres directa</item>
+        <item name="3_indirect">regla de tres indirecta</item>
+    </string-array>
     <string-array name="time">
         <item name="s">segundo</item>
         <item name="m">minuto</item>

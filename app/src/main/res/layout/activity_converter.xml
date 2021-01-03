@@ -18,17 +18,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/btn_calc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.0"
-                android:onClick="change"
-                android:paddingEnd="5dp"
+                android:onClick="toCalculator"
                 android:text="@string/mode_calculator"
-                android:textAlignment="textEnd"
+                android:textAlignment="center"
                 android:textColor="@color/contrast_mid"
                 android:theme="@style/TextOne" />
 
@@ -37,10 +38,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.0"
-                android:paddingStart="5dp"
                 android:text="@string/mode_converter"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="@color/contrast_dark"
+                android:theme="@style/TextOne" />
+
+            <TextView
+                android:id="@+id/btn_operations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:onClick="toOperations"
+                android:text="@string/mode_operations"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_mid"
                 android:theme="@style/TextOne" />
         </LinearLayout>
 

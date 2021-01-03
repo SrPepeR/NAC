@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">NAC</string>
     <string name="mode_calculator">calculator</string>
     <string name="mode_converter">converter</string>
+    <string name="mode_operations">operations</string>
     <string name="calc_sin" translatable="false">sin</string>
     <string name="calc_cos" translatable="false">cos</string>
     <string name="calc_tan" translatable="false">tan</string>
@@ -39,6 +40,15 @@
     <string name="con_time">time</string>
     <string name="con_speed">speed</string>
     <string name="con_data">data</string>
+    <string name="op_clear">clear</string>
+    <string name="op_ohm_v" translatable="false">V</string>
+    <string name="op_ohm_i" translatable="false">I</string>
+    <string name="op_ohm_r" translatable="false">R</string>
+    <string-array name="op_types">
+        <item name="ohm">Ohms law</item>
+        <item name="3_direct">direct rule of three</item>
+        <item name="3_indirect">indirect rule of three</item>
+    </string-array>
     <string-array name="length">
         <item name="m" translatable="false">m</item>
         <item name="km" translatable="false">km</item>
