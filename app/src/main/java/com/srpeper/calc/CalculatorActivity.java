@@ -18,6 +18,7 @@ import com.srpeper.calc.enums.Op;
 import com.srpeper.calc.objects.Calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CalculatorActivity extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private TextToSpeech textToSpeech;
     private final int RCODE = 28;
+
+    private final int CAMERA = 1414;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         );
+
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, getResources().getConfiguration().locale);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -100,8 +104,57 @@ public class CalculatorActivity extends AppCompatActivity {
 
             refreshOperation();
             refreshResult();
+        } else if (requestCode == CAMERA && data.getStringExtra("OPERATION") != null) {
+            String result = data.getStringExtra("OPERATION");
+            String[] receivedOperation = result.split(" ");
+
+            ArrayList<String> operation = new ArrayList<>();
+
+            if (receivedOperation.length > 0) {
+                // The operation received is not empty
+                for (String receivedPart : receivedOperation) {
+                    operation.addAll(split(receivedPart));
+                }
+            }
+
+            calculator = new Calculator();
+            this.calculator.setOperation((String[]) operation.toArray(new String[operation.size()]));
+
+            refreshOperation();
+            refreshResult();
+        }
+    }
+
+    private ArrayList<String> split(String str) {
+        ArrayList<String> splitted = new ArrayList<String>();
+        int initialPartPosition = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            char actualChar = str.charAt(i);
+            if (actualChar == Op.SUM.getSymbol() || actualChar == Op.SUB.getSymbol() ||
+                    actualChar == Op.MUL.getSymbol() || actualChar == Op.DIV.getSymbol() ||
+                    actualChar == Op.POT.getSymbol() || actualChar == EspP.FRACTION.getSymbol() ||
+                    actualChar == '*') {
+                // OPERATION DETECTED
+                splitted.add(str.substring(initialPartPosition, i));
+                splitted.add(String.valueOf(str.charAt(i)));
+                initialPartPosition = i + 1;
+            }
         }
 
+        if (splitted.size() == 0) {
+            // NO OPERATIONS DETECTED
+            splitted.add(str);
+        } else {
+            splitted.add(str.substring(initialPartPosition, str.length()));
+        }
+
+        return splitted;
+    }
+
+    public void openCamera (View button) {
+        Intent openCamera = new Intent(this, CameraActivity.class);
+        startActivityForResult(openCamera, CAMERA);
     }
 
     public void toConverter (View button) {

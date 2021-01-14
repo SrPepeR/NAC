@@ -142,6 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/button_one"
+                android:onClick="openCamera"
                 android:src="@drawable/ic_camera"
                 android:textColor="@color/contrast_dark" />
 

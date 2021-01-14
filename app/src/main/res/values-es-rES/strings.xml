@@ -12,6 +12,8 @@
     <string name="con_speed">velocidad</string>
     <string name="con_data">datos</string>
     <string name="op_clear">limpiar</string>
+    <string name="cam_calculate">calcular</string>
+    <string name="cam_scanning">escaneando</string>
     <string-array name="op_types">
         <item name="ohm">ley de Ohm</item>
         <item name="3_direct">regla de tres directa</item>

@@ -492,13 +492,13 @@ public class Calculator {
                             addNewNum(part.charAt(i));
                         }
                     }
-            } else if (part.equals("pi") || part.equals("phi")) {
+            } else if (part.equals("pi") || part.equals("phi") || part.equals(String.valueOf(Num.PI.getSymbol()))) {
                 addNum(Num.PI);
             } else if (part.equals("menos") || part.equals("substract") || part.equals(String.valueOf(Op.SUB.getSymbol()))) {
                 addOp(Op.SUB);
             } else if (part.equals("más") || part.equals("more") || part.equals("sum") || part.equals(String.valueOf(Op.SUM.getSymbol()))) {
                 addOp(Op.SUM);
-            } else if (part.equals("por") || part.equals("multiplicado") || part.equals("multiply") || part.equals("multiplied") || part.equals("x") || part.equals(String.valueOf(Op.MUL.getSymbol()))) {
+            } else if (part.equals("por") || part.equals("multiplicado") || part.equals("multiply") || part.equals("multiplied") || part.equals("x") || part.equals("*") || part.equals(String.valueOf(Op.MUL.getSymbol()))) {
                 addOp(Op.MUL);
             } else if (part.equals("entre") || part.equals("dividido") || part.equals("division") || part.equals("divided") || part.equals(String.valueOf(Op.DIV.getSymbol()))) {
                 addOp(Op.DIV);

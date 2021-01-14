@@ -7,4 +7,5 @@
     <color name="contrast_dark">#FF6464B3</color>
     <color name="contrast_mid">#806464B3</color>
     <color name="contrast_low">#808282E6</color>
+    <color name="purple_normal_camera">#CC1E1E32</color>
 </resources>

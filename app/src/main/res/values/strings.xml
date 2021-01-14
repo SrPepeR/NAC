@@ -44,6 +44,8 @@
     <string name="op_ohm_v" translatable="false">V</string>
     <string name="op_ohm_i" translatable="false">I</string>
     <string name="op_ohm_r" translatable="false">R</string>
+    <string name="cam_calculate">calculate</string>
+    <string name="cam_scanning">scanning</string>
     <string-array name="op_types">
         <item name="ohm">Ohms law</item>
         <item name="3_direct">direct rule of three</item>

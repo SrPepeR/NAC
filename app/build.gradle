@@ -43,4 +43,7 @@ dependencies {
 
     //HORIZONTAL TEXT PICKER
     implementation 'com.shawnlin:number-picker:2.4.11'
+
+    //GOOGLE VISION API
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
 }
