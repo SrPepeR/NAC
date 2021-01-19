@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConverterActivity">
+
+    <LinearLayout
+        android:id="@+id/conv_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:paddingTop="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/btn_calc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:onClick="toCalculator"
+                android:text="@string/mode_calculator"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_mid"
+                android:theme="@style/TextOne_land" />
+
+            <TextView
+                android:id="@+id/btn_conv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:text="@string/mode_converter"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_dark"
+                android:theme="@style/TextOne_land" />
+
+            <TextView
+                android:id="@+id/btn_operations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:onClick="toOperations"
+                android:text="@string/mode_operations"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_mid"
+                android:theme="@style/TextOne_land" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/con_len"
+            android:textAlignment="center"
+            android:theme="@style/TextFour" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="horizontal"
+                android:gravity="center_vertical" >
+
+                <Spinner
+                    android:id="@+id/spn_unity_value"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/button_three"
+                    android:entries="@array/length"
+                    android:textColor="@color/contrast_normal"
+                    android:theme="@style/ButtonThreeSmall" />
+
+                <TextView
+                    android:id="@+id/txt_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:text="@string/num_zero"
+                    android:textAlignment="textEnd"
+                    android:theme="@style/TextFive" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="horizontal"
+                android:gravity="center_vertical" >
+
+                <Spinner
+                    android:id="@+id/spn_unity_result"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@drawable/button_three"
+                    android:entries="@array/length"
+                    android:textColor="@color/contrast_normal"
+                    android:theme="@style/ButtonThreeSmall" />
+
+                <TextView
+                    android:id="@+id/txt_result_conv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="20dp"
+                    android:layout_marginEnd="40dp"
+                    android:text="@string/num_zero"
+                    android:textAlignment="textEnd"
+                    android:theme="@style/TextFive" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/contrast_normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/conv_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_length"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_len"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+                <Button
+                    android:id="@+id/conv_btn_weight"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_weight"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_area"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_area"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+                <Button
+                    android:id="@+id/conv_btn_temp"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:text="@string/con_temp"
+                    android:layout_weight="1"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_volume"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_volume"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+                <Button
+                    android:id="@+id/conv_btn_data"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_data"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_speed"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_speed"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+                <Button
+                    android:id="@+id/conv_btn_time"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_time"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_money"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="changeType"
+                    android:layout_weight="1"
+                    android:text="@string/con_money"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwoSmall" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_height="match_parent"
+            android:layout_width="1dp"
+            android:background="@color/contrast_normal" />
+
+        <LinearLayout
+            android:id="@+id/conv_num"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/conv_btn_seven"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_seven"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_eight"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_eight"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_nine"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_nine"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <ImageButton
+                    android:id="@+id/btn_delete_conv"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_three"
+                    android:onClick="delete"
+                    android:src="@drawable/ic_delete"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonTwo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_three"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_three"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_four"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_four"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_five"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_five"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_six"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_six"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/conv_btn_comma"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addComma"
+                    android:text="@string/num_comma"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_zero"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_zero"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_one"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_one"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+                <Button
+                    android:id="@+id/conv_btn_two"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/purple_normal"
+                    android:onClick="addNum"
+                    android:text="@string/num_two"
+                    android:textColor="@color/contrast_dark"
+                    android:theme="@style/ButtonOne_land" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

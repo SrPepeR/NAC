@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OperationsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/btn_calc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:onClick="toCalculator"
+                android:text="@string/mode_calculator"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_mid"
+                android:theme="@style/TextOne_land" />
+
+            <TextView
+                android:id="@+id/btn_conv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:onClick="toConverter"
+                android:text="@string/mode_converter"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_mid"
+                android:theme="@style/TextOne_land" />
+
+            <TextView
+                android:id="@+id/btn_operations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:text="@string/mode_operations"
+                android:textAlignment="center"
+                android:textColor="@color/contrast_dark"
+                android:theme="@style/TextOne_land" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/op_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/contrast_normal" />
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/modePicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/purple_normal"
+            app:np_dividerColor="@android:color/transparent"
+            app:np_selectedTextColor="@color/contrast_normal"
+            app:np_selectedTextSize="25sp"
+            app:np_textColor="@color/contrast_mid"
+            app:np_textSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/contrast_normal" />
+
+        <TextView
+            android:id="@+id/op_clear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/purple_normal"
+            android:gravity="center"
+            android:onClick="clear"
+            android:text="@string/op_clear"
+            android:textAlignment="center"
+            android:textColor="@color/contrast_dark"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

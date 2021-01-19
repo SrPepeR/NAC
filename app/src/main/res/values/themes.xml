@@ -19,6 +19,10 @@
         <item name="android:textSize">40sp</item>
     </style>
 
+    <style name="ButtonOne_land">
+        <item name="android:textSize">30sp</item>
+    </style>
+
     <style name="ButtonOneSmall">
         <item name="android:textSize">25sp</item>
     </style>
@@ -31,6 +35,12 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ButtonTwoSmall_land">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="ButtonThreeSmall">
@@ -55,12 +65,20 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="TextOne_land">
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="TextTwo">
         <item name="android:textSize">35sp</item>
     </style>
 
     <style name="TextThree">
         <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="TextThree_land">
+        <item name="android:textSize">25sp</item>
     </style>
 
     <style name="TextFour">

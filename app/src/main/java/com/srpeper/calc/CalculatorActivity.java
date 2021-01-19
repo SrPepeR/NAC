@@ -1,6 +1,8 @@
 package com.srpeper.calc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -104,7 +106,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
             refreshOperation();
             refreshResult();
-        } else if (requestCode == CAMERA && data.getStringExtra("OPERATION") != null) {
+        } else if (requestCode == CAMERA && data != null && data.getStringExtra("OPERATION").length() > 0) {
             String result = data.getStringExtra("OPERATION");
             String[] receivedOperation = result.split(" ");
 
